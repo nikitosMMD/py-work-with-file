@@ -1,74 +1,82 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useState, type ComponentType } from "react";
+import { ChevronDown } from "lucide-react";
 import {
-  Brain,
-  Calculator,
-  ChevronDown,
-  Eye,
-  Globe2,
-  GraduationCap,
-  Lightbulb,
-  MessagesSquare,
-  Wrench,
-} from "lucide-react";
+  ArtErudition,
+  ArtLanguages,
+  ArtLogic,
+  ArtMath,
+  ArtMemory,
+  ArtObservation,
+  ArtPsychology,
+  ArtSkills,
+} from "./DirectionArt";
 
-const directions = [
+type Direction = {
+  title: string;
+  description: string;
+  example: string;
+  Art: ComponentType<{ className?: string }>;
+  tone: string;
+};
+
+const directions: Direction[] = [
   {
     title: "Логика и критическое мышление",
-    description: "Разбирать аргументы, замечать допущения и проверять выводы.",
+    description: "Разбирать аргументы и проверять выводы.",
     example: "Пример занятия: отличить факт от мнения в короткой новости.",
-    icon: Brain,
-    tone: "bg-[#e8eefc] text-[#3554c4]",
+    Art: ArtLogic,
+    tone: "bg-[#e7eefc]",
   },
   {
     title: "Наблюдательность",
-    description: "Фиксировать детали и отделять увиденное от догадок.",
+    description: "Фиксировать детали без лишних догадок.",
     example: "Пример занятия: описать сцену только наблюдаемыми деталями.",
-    icon: Eye,
-    tone: "bg-[#ffeeda] text-[#c46a1d]",
+    Art: ArtObservation,
+    tone: "bg-[#ffeeda]",
   },
   {
     title: "Психология",
-    description: "Понимать эмоции, привычки и влияние контекста на решения.",
+    description: "Понимать эмоции, привычки и контекст решений.",
     example: "Пример занятия: разобрать, как формулировка задачи меняет выбор.",
-    icon: Lightbulb,
-    tone: "bg-[#f1e8ff] text-[#6d3fc4]",
+    Art: ArtPsychology,
+    tone: "bg-[#f1e8ff]",
   },
   {
     title: "Память и обучение",
-    description: "Строить устойчивые знания через практику и повторение.",
+    description: "Закреплять знания практикой и повторением.",
     example: "Пример занятия: собрать карточки для интервального повторения.",
-    icon: GraduationCap,
-    tone: "bg-[#e7f7ef] text-[#1f8a57]",
+    Art: ArtMemory,
+    tone: "bg-[#e6f7ef]",
   },
   {
     title: "Общая эрудиция",
-    description: "Связывать факты из разных областей в понятную картину.",
+    description: "Связывать факты из разных областей.",
     example: "Пример занятия: объяснить явление простыми аналогиями.",
-    icon: Globe2,
-    tone: "bg-[#e9f4ff] text-[#2178b8]",
+    Art: ArtErudition,
+    tone: "bg-[#e8f4ff]",
   },
   {
     title: "Иностранные языки",
-    description: "Тренировать понимание и речь на понятных жизненных темах.",
+    description: "Тренировать речь на жизненных темах.",
     example: "Пример занятия: короткий диалог о планах на неделю.",
-    icon: MessagesSquare,
-    tone: "bg-[#e8f8f2] text-[#1f8f6d]",
+    Art: ArtLanguages,
+    tone: "bg-[#e7f8f1]",
   },
   {
     title: "Математика",
-    description: "Решать практические задачи и укреплять точность мышления.",
-    example: "Пример занятия: посчитать бюджет поездки с несколькими условиями.",
-    icon: Calculator,
-    tone: "bg-[#ebefff] text-[#3d4fc4]",
+    description: "Решать практические задачи точно и спокойно.",
+    example: "Пример занятия: посчитать бюджет поездки с условиями.",
+    Art: ArtMath,
+    tone: "bg-[#eaeefe]",
   },
   {
     title: "Практические навыки",
-    description: "Применять знания в быту, работе и самостоятельных проектах.",
-    example: "Пример занятия: составить чеклист подготовки к важному разговору.",
-    icon: Wrench,
-    tone: "bg-[#fff3e5] text-[#b86b1f]",
+    description: "Переносить знания в быт и проекты.",
+    example: "Пример занятия: чеклист подготовки к важному разговору.",
+    Art: ArtSkills,
+    tone: "bg-[#fff2e4]",
   },
 ];
 
@@ -77,36 +85,40 @@ export function Directions() {
   const baseId = useId();
 
   return (
-    <section id="directions" className="section" aria-labelledby="directions-title">
+    <section id="directions" className="section bg-[var(--bg)]" aria-labelledby="directions-title">
       <div className="container">
-        <div className="max-w-2xl">
-          <h2 id="directions-title" className="section-title">
-            Восемь направлений для роста
-          </h2>
-          <p className="section-lead">
-            Выберите тему и посмотрите, как может выглядеть короткое занятие. Все примеры —
-            демонстрационные.
-          </p>
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--ink-muted)]">
+              Направления
+            </p>
+            <h2 id="directions-title" className="section-title">
+              Восемь направлений для роста
+            </h2>
+            <p className="section-lead">
+              Выберите тему и откройте короткий пример занятия. Все примеры демонстрационные.
+            </p>
+          </div>
         </div>
 
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <ul className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {directions.map((item) => {
-            const Icon = item.icon;
+            const Art = item.Art;
             const panelId = `${baseId}-${item.title}`;
             const isOpen = openId === item.title;
 
             return (
               <li key={item.title}>
                 <article
-                  className={`h-full rounded-[var(--radius-md)] ${item.tone} p-5 shadow-[var(--shadow-card)] transition-[box-shadow,transform] duration-200 hover:shadow-[var(--shadow-soft)]`}
+                  className={`direction-card ${item.tone} ${isOpen ? "is-open" : ""}`}
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/70">
-                      <Icon className="h-5 w-5" aria-hidden />
-                    </span>
+                  <div className="mb-1 flex items-start justify-between gap-2">
+                    <div className="flex min-h-[132px] flex-1 items-center justify-center pt-1">
+                      <Art className="direction-art" />
+                    </div>
                     <button
                       type="button"
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/70 text-current"
+                      className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/80 text-[var(--ink)] shadow-sm transition-colors hover:bg-white"
                       aria-expanded={isOpen}
                       aria-controls={panelId}
                       aria-label={
@@ -117,21 +129,21 @@ export function Directions() {
                       onClick={() => setOpenId(isOpen ? null : item.title)}
                     >
                       <ChevronDown
-                        className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                        className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                         aria-hidden
                       />
                     </button>
                   </div>
-                  <h3 className="mt-4 text-base font-semibold leading-snug text-[var(--ink)]">
+                  <h3 className="mt-2 text-[1.15rem] font-bold leading-snug tracking-tight text-[var(--ink)]">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+                  <p className="mt-2 text-[0.95rem] leading-relaxed text-[var(--ink-soft)]">
                     {item.description}
                   </p>
                   {isOpen ? (
                     <p
                       id={panelId}
-                      className="mt-3 rounded-xl bg-white/65 px-3 py-2 text-sm text-[var(--ink)]"
+                      className="mt-4 rounded-2xl bg-white/75 px-3.5 py-3 text-sm leading-relaxed text-[var(--ink)] shadow-sm"
                     >
                       {item.example}
                     </p>

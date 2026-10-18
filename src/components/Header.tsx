@@ -29,13 +29,9 @@ export function Header() {
     };
   }, [open]);
 
-  const close = () => setOpen(false);
-
   const goTo = (href: string) => {
-    document.body.style.overflow = "";
     setOpen(false);
-    // После снятия overflow меню — прокрутить к якорю явно
-    window.requestAnimationFrame(() => {
+    window.setTimeout(() => {
       const id = href.startsWith("#") ? href.slice(1) : href;
       const target = document.getElementById(id);
       if (target) {
@@ -43,25 +39,25 @@ export function Header() {
       } else {
         window.location.hash = href;
       }
-    });
+    }, 0);
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(245,246,248,0.82)] backdrop-blur-md">
-      <div className="container flex h-16 items-center justify-between gap-4">
-        <a href="#top" className="flex items-center gap-2 font-bold tracking-tight">
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-[linear-gradient(135deg,var(--accent-from),var(--accent-to))] text-white shadow-sm">
+    <header className="sticky top-0 z-50 border-b border-white/40 bg-[rgba(243,244,247,0.72)] backdrop-blur-xl">
+      <div className="container flex h-[4.25rem] items-center justify-between gap-4">
+        <a href="#top" className="flex items-center gap-2.5 font-bold tracking-tight">
+          <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,var(--accent-from),var(--accent-to))] text-white shadow-[0_8px_20px_rgba(91,108,255,0.35)]">
             <Sparkles className="h-4 w-4" aria-hidden />
           </span>
-          <span className="text-lg">StudyOS</span>
+          <span className="text-[1.15rem]">StudyOS</span>
         </a>
 
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Основная навигация">
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Основная навигация">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-[var(--ink-soft)] transition-colors hover:text-[var(--ink)]"
+              className="text-[0.95rem] font-medium text-[var(--ink-soft)] transition-colors hover:text-[var(--ink)]"
             >
               {link.label}
             </a>
@@ -69,14 +65,14 @@ export function Header() {
         </nav>
 
         <div className="hidden md:block">
-          <a href="#exercise" className="btn btn-primary">
+          <a href="#exercise" className="btn btn-primary min-h-11 px-5 text-sm">
             Попробовать упражнение
           </a>
         </div>
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] bg-white md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] bg-white/90 md:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           aria-label={open ? "Закрыть меню" : "Открыть меню"}

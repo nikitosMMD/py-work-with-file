@@ -1,63 +1,70 @@
-import {
-  BookOpen,
-  Brain,
-  CalendarDays,
-  ChartColumnIncreasing,
-  Eye,
-  Languages,
-  RefreshCw,
-} from "lucide-react";
+import { BookOpen, Brain, Languages, RefreshCw } from "lucide-react";
 
 const plan = [
-  { icon: Brain, title: "Логика", meta: "15 мин · упражнение" },
-  { icon: Languages, title: "Испанский", meta: "20 мин · практика" },
-  { icon: BookOpen, title: "Математика", meta: "25 мин · задачи" },
+  { icon: Brain, title: "Логика", meta: "15 мин · упражнение", done: true },
+  { icon: Languages, title: "Немецкий", meta: "20 мин · практика", done: false },
+  { icon: BookOpen, title: "Английский", meta: "18 мин · диалог", done: false },
 ];
 
 export function DashboardPreview() {
   return (
-    <figure className="animate-float w-full">
-      <div className="overflow-hidden rounded-[var(--radius-lg)] bg-[var(--dash-bg)] p-3 text-white shadow-[var(--shadow-soft)] ring-1 ring-white/10 sm:p-4">
-        <div className="grid gap-3 md:grid-cols-[132px_1fr]">
-          <aside className="hidden rounded-2xl bg-[var(--dash-panel)] p-3 md:block">
-            <p className="mb-4 text-xs font-semibold tracking-wide text-white/50">Меню</p>
-            <ul className="space-y-2 text-sm text-white/80">
-              <li className="rounded-xl bg-white/10 px-3 py-2">Сегодня</li>
-              <li className="rounded-xl px-3 py-2">Направления</li>
-              <li className="rounded-xl px-3 py-2">Повторение</li>
-              <li className="rounded-xl px-3 py-2">Прогресс</li>
+    <figure className="dash-stage animate-float">
+      <div className="dash-frame relative z-[1] p-3 sm:p-4 lg:p-5">
+        <div className="dash-glow" aria-hidden />
+        <div className="relative z-[1] grid gap-3 lg:grid-cols-[128px_minmax(0,1fr)]">
+          <aside className="hidden rounded-2xl bg-white/[0.04] p-3 lg:block">
+            <p className="mb-4 px-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40">
+              StudyOS
+            </p>
+            <ul className="space-y-1.5 text-sm text-white/75">
+              <li className="rounded-xl bg-white/12 px-3 py-2.5 font-medium text-white">Сегодня</li>
+              <li className="rounded-xl px-3 py-2.5">Направления</li>
+              <li className="rounded-xl px-3 py-2.5">Повторение</li>
+              <li className="rounded-xl px-3 py-2.5">Прогресс</li>
             </ul>
           </aside>
 
-          <div className="space-y-3">
-            <div className="flex items-center justify-between gap-3 rounded-2xl bg-[var(--dash-panel)] px-4 py-3">
+          <div className="min-w-0 space-y-3">
+            <div className="flex items-center justify-between gap-3 px-1">
               <div>
-                <p className="text-sm text-white/55">Доброе утро</p>
-                <p className="font-semibold">План на сегодня</p>
+                <p className="text-sm text-white/50">Доброе утро</p>
+                <p className="text-lg font-semibold tracking-tight">План на сегодня</p>
               </div>
-              <CalendarDays className="h-5 w-5 text-white/55" aria-hidden />
+              <span className="rounded-full bg-white/8 px-3 py-1 text-xs text-white/55">
+                Демонстрационные данные
+              </span>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-[1.2fr_0.8fr]">
-              <div className="rounded-2xl bg-[var(--dash-panel)] p-4">
-                <div className="mb-3 flex items-center justify-between">
-                  <h3 className="text-sm font-semibold">Занятия</h3>
-                  <span className="text-xs text-white/45">демо</span>
+            <div className="grid gap-3 sm:grid-cols-[1.25fr_0.9fr]">
+              <div className="dash-plan-card rounded-[22px] p-4 sm:p-5">
+                <div className="mb-3 flex items-center justify-between gap-2">
+                  <h3 className="text-sm font-semibold tracking-tight">Учебный план</h3>
+                  <span className="text-xs font-medium text-[#6d4fc4]">3 занятия</span>
                 </div>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {plan.map((item) => {
                     const Icon = item.icon;
                     return (
                       <li
                         key={item.title}
-                        className="flex items-center gap-3 rounded-xl border border-[var(--dash-line)] bg-white/[0.03] px-3 py-2.5"
+                        className="flex items-center gap-3 rounded-2xl bg-white/70 px-3 py-2.5 shadow-sm"
                       >
-                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10">
+                        <span
+                          className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
+                            item.done
+                              ? "border-[#7c5cff] bg-[#7c5cff] text-white"
+                              : "border-[#c9b8f0] bg-white"
+                          }`}
+                          aria-hidden
+                        >
+                          {item.done ? "✓" : ""}
+                        </span>
+                        <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#ebe4ff] text-[#5b45b8]">
                           <Icon className="h-4 w-4" aria-hidden />
                         </span>
-                        <div>
-                          <p className="text-sm font-medium">{item.title}</p>
-                          <p className="text-xs text-white/50">{item.meta}</p>
+                        <div className="min-w-0">
+                          <p className="truncate text-sm font-semibold">{item.title}</p>
+                          <p className="text-xs text-[var(--ink-soft)]">{item.meta}</p>
                         </div>
                       </li>
                     );
@@ -66,48 +73,47 @@ export function DashboardPreview() {
               </div>
 
               <div className="grid gap-3">
-                <div className="rounded-2xl bg-[var(--dash-panel)] p-4">
+                <div className="rounded-[22px] bg-[var(--dash-panel)] p-4 ring-1 ring-white/8">
                   <div className="mb-3 flex items-center gap-2">
-                    <RefreshCw className="h-4 w-4 text-[#9b8cff]" aria-hidden />
+                    <RefreshCw className="h-4 w-4 text-[#b6a4ff]" aria-hidden />
                     <h3 className="text-sm font-semibold">Повторение</h3>
                   </div>
-                  <p className="text-sm text-white/70">
-                    3 карточки по теме «Наблюдение и интерпретация»
+                  <p className="text-sm leading-snug text-white/75">
+                    3 карточки · наблюдение и интерпретация
                   </p>
                   <p className="mt-2 text-xs text-white/45">Через 2 дня</p>
                 </div>
 
-                <div className="rounded-2xl bg-[var(--dash-panel)] p-4">
-                  <div className="mb-3 flex items-center gap-2">
-                    <ChartColumnIncreasing className="h-4 w-4 text-[#7aa2ff]" aria-hidden />
-                    <h3 className="text-sm font-semibold">Прогресс</h3>
+                <div className="rounded-[22px] bg-[var(--dash-panel)] p-4 ring-1 ring-white/8">
+                  <div className="mb-3 flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="text-sm font-semibold">Прогресс</h3>
+                      <p className="mt-1 text-xs text-white/45">За неделю</p>
+                    </div>
+                    <div className="dash-progress-ring" style={{ ["--p" as string]: 72 }} role="img" aria-label="Демонстрационный прогресс 72 процента">
+                      <span className="dash-progress-value">72%</span>
+                    </div>
                   </div>
                   <div
-                    className="flex h-16 items-end gap-1.5"
+                    className="mt-1 flex h-14 items-end gap-1.5"
                     role="img"
-                    aria-label="Демонстрационный график прогресса за неделю"
+                    aria-label="Демонстрационный график активности"
                   >
-                    {[28, 42, 36, 58, 50, 72, 64].map((height, index) => (
+                    {[34, 48, 42, 62, 55, 78, 70].map((height, index) => (
                       <span
                         key={index}
-                        className="flex-1 rounded-t-md bg-[linear-gradient(180deg,#9b5cff,#5b6cff)] opacity-90"
+                        className="flex-1 rounded-t-md bg-[linear-gradient(180deg,#b08cff,#5b6cff)]"
                         style={{ height: `${height}%` }}
                       />
                     ))}
                   </div>
-                  <p className="mt-2 text-xs text-white/45">Демо-данные за неделю</p>
                 </div>
               </div>
-            </div>
-
-            <div className="flex items-center gap-2 rounded-2xl border border-[var(--dash-line)] bg-white/[0.03] px-4 py-3 text-sm text-white/70 md:hidden">
-              <Eye className="h-4 w-4 shrink-0" aria-hidden />
-              Упрощённый вид интерфейса на телефоне
             </div>
           </div>
         </div>
       </div>
-      <figcaption className="mt-3 text-center text-sm text-[var(--ink-muted)]">
+      <figcaption className="mt-3.5 text-center text-sm text-[var(--ink-muted)]">
         Пример интерфейса
       </figcaption>
     </figure>

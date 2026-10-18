@@ -25,12 +25,22 @@ export function DashboardPreview() {
           </aside>
 
           <div className="min-w-0 space-y-3">
-            <div className="flex items-center justify-between gap-3 px-1">
-              <div>
+            {/* Мобильная шапка: одна строка заголовка, без конкурирующего бейджа */}
+            <div className="px-1 sm:hidden">
+              <p className="text-sm text-white/50">Доброе утро</p>
+              <p className="truncate text-base font-semibold tracking-tight whitespace-nowrap">
+                План на сегодня
+              </p>
+            </div>
+
+            <div className="hidden items-center justify-between gap-3 px-1 sm:flex">
+              <div className="min-w-0">
                 <p className="text-sm text-white/50">Доброе утро</p>
-                <p className="text-lg font-semibold tracking-tight">План на сегодня</p>
+                <p className="truncate text-lg font-semibold tracking-tight whitespace-nowrap">
+                  План на сегодня
+                </p>
               </div>
-              <span className="rounded-full bg-white/8 px-3 py-1 text-xs text-white/55">
+              <span className="shrink-0 rounded-full bg-white/8 px-3 py-1 text-xs text-white/55">
                 Демонстрационные данные
               </span>
             </div>
@@ -50,7 +60,7 @@ export function DashboardPreview() {
                         className="flex items-center gap-3 rounded-2xl bg-white/70 px-3 py-2.5 shadow-sm"
                       >
                         <span
-                          className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border ${
+                          className={`inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[10px] ${
                             item.done
                               ? "border-[#7c5cff] bg-[#7c5cff] text-white"
                               : "border-[#c9b8f0] bg-white"
@@ -90,7 +100,12 @@ export function DashboardPreview() {
                       <h3 className="text-sm font-semibold">Прогресс</h3>
                       <p className="mt-1 text-xs text-white/45">За неделю</p>
                     </div>
-                    <div className="dash-progress-ring" style={{ ["--p" as string]: 72 }} role="img" aria-label="Демонстрационный прогресс 72 процента">
+                    <div
+                      className="dash-progress-ring"
+                      style={{ ["--p" as string]: 72 }}
+                      role="img"
+                      aria-label="Демонстрационный прогресс 72 процента"
+                    >
                       <span className="dash-progress-value">72%</span>
                     </div>
                   </div>
@@ -113,7 +128,7 @@ export function DashboardPreview() {
           </div>
         </div>
       </div>
-      <figcaption className="mt-3.5 text-center text-sm text-[var(--ink-muted)]">
+      <figcaption className="relative z-[1] mt-3.5 text-center text-sm text-[var(--ink-muted)]">
         Пример интерфейса
       </figcaption>
     </figure>

@@ -154,29 +154,63 @@ svg {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding-block: clamp(2.5rem, 5vw, 4.25rem) clamp(3rem, 6vw, 5rem);
+  padding-block: clamp(2.5rem, 5vw, 4.25rem) clamp(3.5rem, 7vw, 5.5rem);
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: -3;
 }
 
 .hero-bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 42%;
+  /* Кадр: спокойный свет слева, хребты правее под Dashboard */
+  object-position: 78% 52%;
+  transform: scale(1.08);
 }
 
-.hero-bg-veil {
+.hero-bg-left {
   position: absolute;
-  inset: 0;
-  z-index: -1;
+  inset: 0 auto 0 0;
+  width: min(62%, 780px);
+  z-index: -2;
   background:
-    linear-gradient(105deg, rgba(243, 244, 247, 0.9) 0%, rgba(243, 244, 247, 0.62) 36%, rgba(243, 244, 247, 0.18) 62%, rgba(243, 244, 247, 0.28) 100%),
-    linear-gradient(180deg, rgba(243, 244, 247, 0.12) 0%, transparent 42%, var(--bg) 94%);
+    linear-gradient(90deg, #f6f7fa 0%, rgba(246, 247, 250, 0.97) 42%, rgba(246, 247, 250, 0.72) 70%, rgba(246, 247, 250, 0) 100%),
+    radial-gradient(ellipse 100% 80% at 12% 35%, rgba(255, 255, 255, 0.85), transparent 68%);
+  pointer-events: none;
+}
+
+.hero-bg-right {
+  position: absolute;
+  inset: 0 0 12% 28%;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 58% 62% at 82% 40%, rgba(130, 95, 230, 0.34), transparent 66%),
+    radial-gradient(ellipse 46% 50% at 92% 62%, rgba(70, 120, 230, 0.26), transparent 68%);
+  pointer-events: none;
+}
+
+.hero-bg-fade {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: min(48%, 320px);
+  z-index: -1;
+  background: linear-gradient(180deg, transparent 0%, rgba(243, 244, 247, 0.35) 28%, rgba(243, 244, 247, 0.78) 62%, var(--bg) 100%);
+  pointer-events: none;
+}
+
+.hero-dash-aura {
+  position: absolute;
+  z-index: 0;
+  inset: 0% -10% -8% 8%;
+  border-radius: 42%;
+  background:
+    radial-gradient(ellipse 58% 54% at 62% 42%, rgba(165, 110, 255, 0.55), transparent 70%),
+    radial-gradient(ellipse 42% 42% at 74% 58%, rgba(90, 130, 255, 0.35), transparent 72%);
+  filter: blur(4px);
   pointer-events: none;
 }
 
@@ -225,11 +259,11 @@ svg {
 
 .dash-glow {
   position: absolute;
-  inset: -20% -10% auto auto;
-  width: 55%;
-  height: 55%;
+  inset: -28% -18% auto auto;
+  width: 70%;
+  height: 70%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(155, 92, 255, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(155, 92, 255, 0.42), rgba(90, 120, 255, 0.12) 45%, transparent 72%);
   pointer-events: none;
   z-index: 0;
 }
@@ -301,6 +335,8 @@ svg {
   height: auto;
   max-height: 132px;
   margin-inline: auto;
+  object-fit: contain;
+  border-radius: 18px;
 }
 
 @keyframes rise-in {

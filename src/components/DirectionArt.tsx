@@ -42,29 +42,29 @@ export function ArtLogic({ className }: ArtProps) {
 
 export function ArtObservation({ className }: ArtProps) {
   return (
-    <Frame className={className}>
-      <ellipse cx="80" cy="60" rx="50" ry="28" fill="#ffb06b" />
-      <ellipse cx="80" cy="60" rx="50" ry="28" fill="url(#artShine)" />
-      <circle cx="80" cy="60" r="17" fill="#fff7ed" />
-      <circle cx="80" cy="60" r="10" fill="#1f2937" />
-      <circle cx="84" cy="56" r="3" fill="#fff" opacity="0.9" />
-    </Frame>
+    // eslint-disable-next-line @next/next/no-img-element -- decorative card art asset
+    <img
+      className={className}
+      src="/images/art/observation.jpg"
+      alt=""
+      width={168}
+      height={126}
+      decoding="async"
+    />
   );
 }
 
 export function ArtPsychology({ className }: ArtProps) {
   return (
-    <Frame className={className}>
-      <path
-        d="M50 70c0-20 13-34 30-34s30 14 30 34c0 9-3 16-9 22l-7 7H66l-7-7c-6-6-9-13-9-22z"
-        fill="#b58cff"
-      />
-      <path
-        d="M50 70c0-20 13-34 30-34s30 14 30 34c0 9-3 16-9 22l-7 7H66l-7-7c-6-6-9-13-9-22z"
-        fill="url(#artShine)"
-      />
-      <path d="M68 58c4-6 10-8 16-6" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.7" />
-    </Frame>
+    // eslint-disable-next-line @next/next/no-img-element -- decorative card art asset
+    <img
+      className={className}
+      src="/images/art/psychology.jpg"
+      alt=""
+      width={168}
+      height={126}
+      decoding="async"
+    />
   );
 }
 

@@ -15,12 +15,14 @@ export function Hero() {
           className="object-cover"
         />
       </div>
-      <div className="hero-bg-veil" aria-hidden />
+      <div className="hero-bg-left" aria-hidden />
+      <div className="hero-bg-right" aria-hidden />
+      <div className="hero-bg-fade" aria-hidden />
 
       <div className="container grid items-center gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.2fr)] lg:gap-8 xl:gap-12">
         <div className="animate-rise relative z-[1] max-w-xl">
-          <p className="mb-4 inline-flex rounded-full border border-white/50 bg-white/65 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-[var(--ink-soft)] shadow-sm backdrop-blur">
-            Осмысленное обучение без шума
+          <p className="mb-4 inline-flex rounded-full border border-white/60 bg-white/75 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-[var(--ink-soft)] shadow-sm backdrop-blur">
+            Понимание. Практика. Применение.
           </p>
           <h1 id="hero-title" className="hero-title">
             Развивай мышление.
@@ -43,6 +45,7 @@ export function Hero() {
         </div>
 
         <div className="animate-rise-delay relative z-[1] min-w-0 lg:-mr-2 xl:-mr-4">
+          <div className="hero-dash-aura" aria-hidden />
           <DashboardPreview />
         </div>
       </div>

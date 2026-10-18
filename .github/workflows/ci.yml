@@ -1,0 +1,37 @@
+# Next.js checks for StudyOS landing.
+# Note: master's legacy "Test" workflow uses pull_request_target and still runs
+# from the base-branch workflow file (Python + requirements.txt). This workflow
+# runs from the PR head on pull_request / push and validates the current stack.
+name: CI
+
+on:
+  push:
+    branches:
+      - cursor/**
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build
